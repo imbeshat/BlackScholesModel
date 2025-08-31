@@ -77,11 +77,11 @@ class BlackScholes:
     ## return call_theta, put_theta
     
 if __name__ == "__main__":
-    t = 2
-    K = 90
-    S = 100
+    t = 1
+    K = 100
+    S = 120
     sigma = 0.2
-    r = 0.05
+    r = 0.04
 
     # Black Scholes
     blackScholes = BlackScholes(
