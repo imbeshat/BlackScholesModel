@@ -85,10 +85,11 @@ if __name__ == "__main__":
 
     # Black Scholes
     blackScholes = BlackScholes(
-      S = S
-      K = K
       t = t
-      r = r
+      K = K
+      S = S
       sigma = sigma
-    )
+      r = r
+      )
+      
     blackScholes.run()
