@@ -75,3 +75,20 @@ class BlackScholes:
     self.call_theta = call_theta
     self.put_theta = put_theta
     ## return call_theta, put_theta
+    
+if __name__ == "__main__":
+    t = 2
+    K = 90
+    S = 100
+    sigma = 0.2
+    r = 0.05
+
+    # Black Scholes
+    blackScholes = BlackScholes(
+      S = S
+      K = K
+      t = t
+      r = r
+      sigma = sigma
+    )
+    blackScholes.run()
