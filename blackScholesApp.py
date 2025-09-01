@@ -6,7 +6,7 @@ import plotly.graph_objects as go
 from numpy import log, sqrt, exp  # Make sure to import these
 import matplotlib.pyplot as plt
 import seaborn as sns
-
+from blackScholesLogic import BlackScholes
 
 # Page configuration
 st.set_page_config(
@@ -61,64 +61,8 @@ st.markdown("""
 
 # (Include the BlackScholes class definition here)
 
-class BlackScholes:
-    def __init__(
-        self,
-        t: float,
-        K: float,
-        S: float,
-        sigma: float,
-        r: float,
-    ):
-        self.t = t
-        self.K = K
-        self.S = S
-        self.sigma = sigma
-        self.r = r
-
-    def calculate_prices(
-        self,
-    ):
-        t = self.t
-        K = self.K
-        S = self.S
-        sigma = self.sigma
-        r = self.r
-
-        d1 = (
-            log(S / K) +
-            (r + 0.5 * sigma ** 2) * t
-            ) / (
-                sigma * sqrt(t)
-            )
-        d2 = d1 - sigma * sqrt(t)
-
-        call_price = S * norm.cdf(d1) - (
-            K * exp(-(r * t)) * norm.cdf(d2)
-        )
-        put_price = (
-            K * exp(-(r * t)) * norm.cdf(-d2)
-        ) - S * norm.cdf(-d1)
-
-        self.call_price = call_price
-        self.put_price = put_price
-
-        # GREEKS
-        # Delta
-        self.call_delta = norm.cdf(d1)
-        self.put_delta = 1 - norm.cdf(d1)
-
-        # Gamma
-        self.call_gamma = norm.pdf(d1) / (
-            K * sigma * sqrt(t)
-        )
-        self.put_gamma = self.call_gamma
-
-        return call_price, put_price
-
 # Function to generate heatmaps
 # ... your existing imports and BlackScholes class definition ...
-
 
 # Sidebar for User Inputs
 with st.sidebar:
@@ -142,8 +86,6 @@ with st.sidebar:
     
     spot_range = np.linspace(spot_min, spot_max, 10)
     vol_range = np.linspace(vol_min, vol_max, 10)
-
-
 
 def plot_heatmap(bs_model, spot_range, vol_range, strike):
     call_prices = np.zeros((len(vol_range), len(spot_range)))
@@ -187,7 +129,7 @@ input_data = {
     "Current Asset Price": [S],
     "Strike Price": [K],
     "Time to Maturity (Years)": [t],
-    "Volatility (σ)": [sigma],
+    "Volatility (sigma)": [sigma],
     "Risk-Free Interest Rate": [r],
 }
 input_df = pd.DataFrame(input_data)
