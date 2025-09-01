@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 from scipy.stats import norm
 import plotly.graph_objects as go
-from numpy import log, sqrt, exp  # Make sure to import these
+from numpy import log, sqrt, exp  
 import matplotlib.pyplot as plt
 import seaborn as sns
 from blackScholesLogic import BlackScholes
@@ -100,7 +100,7 @@ def plot_heatmap(bs_model, spot_range, vol_range, strike):
                 sigma=vol,
                 r=bs_model.r
             )
-            bs_temp.calculatePrice()
+            call_price, put_price = bs_temp.calculatePrice()
             call_prices[i, j] = bs_temp.call_price
             put_prices[i, j] = bs_temp.put_price
     
