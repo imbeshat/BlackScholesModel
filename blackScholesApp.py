@@ -100,7 +100,7 @@ def plot_heatmap(bs_model, spot_range, vol_range, strike):
                 sigma=vol,
                 r=bs_model.r
             )
-            bs_temp.calculate_prices()
+            bs_temp.calculatePrice()
             call_prices[i, j] = bs_temp.call_price
             put_prices[i, j] = bs_temp.put_price
     
@@ -137,7 +137,7 @@ st.table(input_df)
 
 # Calculate Call and Put values
 bs_model = BlackScholes(t, K, S, sigma, r)
-call_price, put_price = bs_model.calculate_prices()
+call_price, put_price = bs_model.calculatePrice()
 
 # Display Call and Put Values in colored tables
 col1, col2 = st.columns([1,1], gap="small")
