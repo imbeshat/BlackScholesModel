@@ -65,7 +65,7 @@ class BlackScholes:
 
     ## calculate the theta of the option
     call_theta = -(S * norm.pdf(d1) * sigma) / (2 * sqrt(t)) - r * K * exp(-r * t) * norm.cdf(d2)
-    put_theta = -(S * norm.pdf(d1) * sigma) / (2 * sqrt(t)) + r * K * exp(-r * t) * norm.cdf(d2)
+    put_theta = -(S * norm.pdf(d1) * sigma) / (2 * sqrt(t)) + r * K * exp(-r * t) * norm.cdf(-d2)
     
     ## calculate rho
     rho_call = K * t * exp(-r*t) * norm.cdf(d2)
@@ -81,19 +81,19 @@ class BlackScholes:
       "put_rho":rho_put
     }
 if __name__ == "__main__":
-    t = 1
-    K = 100
     S = 120
-    sigma = 0.2
+    K = 100
+    t = 1
     r = 0.04
+    sigma = 0.2
 
     # Black Scholes
     blackScholes = BlackScholes(
-      t = t,
-      K = K,
       S = S,
-      sigma = sigma,
-      r = r
+      K = K,
+      t = t,
+      r = r,
+      sigma = sigma
       )
       
     blackScholes.calculatePrice()

@@ -94,11 +94,11 @@ def plot_heatmap(bs_model, spot_range, vol_range, strike):
     for i, vol in enumerate(vol_range):
         for j, spot in enumerate(spot_range):
             bs_temp = BlackScholes(
-                t=bs_model.t,
-                K=K,
                 S=spot,
-                sigma=vol,
-                r=bs_model.r
+                K=strike,
+                t=bs_model.t,
+                r=bs_model.r,
+                sigma=vol
             )
             call_price, put_price = bs_temp.calculatePrice()
             call_prices[i, j] = bs_temp.call_price
@@ -136,7 +136,7 @@ input_df = pd.DataFrame(input_data)
 st.table(input_df)
 
 # Calculate Call and Put values
-bs_model = BlackScholes(t, K, S, sigma, r)
+bs_model = BlackScholes(S, K, t, r, sigma)
 call_price, put_price = bs_model.calculatePrice()
 
 # Display Call and Put Values in colored tables
